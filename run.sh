@@ -18,7 +18,7 @@ do
   ACCOUNT=${ACCOUNTS[i]}
 
   # download images from instagram
-  echo "[INFO]: Downloading profile ${ACCOUNT}"
+  echo "[INFO]: Downloading profile @${ACCOUNT}"
   if [ -z "$IG_LOGIN" ] || [ -z "$IG_PASSWORD" ]; then
     instaloader ${ACCOUNT} --no-videos --no-video-thumbnails --no-metadata-json --no-compress-json --no-profile-pic --dirname-pattern=./assets/datasets/stylegan2/{profile} --abort-on=302,400,429
   else
@@ -37,13 +37,19 @@ do
     cat ${filename} >> ./assets/datasets/gpt-2/${ACCOUNT}.txt
   done
 
-  echo "[INFO]: Resizing ${ACCOUNT} to ${}-cropped"
+  echo "[INFO]: Resizing ${ACCOUNT} to ${ACCOUNT}-cropped"
   # create empty folder for cropped images
   if [ ! -d ./assets/datasets/stylegan2/${ACCOUNT}-cropped ]; then
     mkdir ./assets/datasets/stylegan2/${ACCOUNT}-cropped
   fi
 
   python ./assets/dataset_resize.py -d ./assets/datasets/stylegan2/${ACCOUNT}/ -s ./assets/datasets/stylegan2/${ACCOUNT}-cropped/
+
+  echo "[INFO]: Creating TFRecords of ${ACCOUNT}-cropped"
+  # create .tfrecords for training
+  python stylegan2/dataset_tool.py create_from_images ./assets/tfrecords/${ACCOUNT} ./assets/datasets/stylegan2/${ACCOUNT}-cropped
+
+  echo "[INFO]: Training StyleGAN2 model based on @${ACCOUNT}"
 
   # increment counter
   ((i++))

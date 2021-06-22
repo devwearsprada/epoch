@@ -1,4 +1,7 @@
-### Python ###
+##########################
+###   General Python   ###
+##########################
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -108,6 +111,7 @@ celerybeat.pid
 # Environments
 # .env
 .env/
+.env
 .venv/
 env/
 venv/
@@ -147,6 +151,17 @@ Thumbs.db
 .prof
 
 
+##########################
+###   Epoch specific   ###
+##########################
+
 # assets
-assets/images/*
-assets/datasets/*
+assets/datasets/stylegan2/*
+!assets/datasets/stylegan2/README.md
+assets/datasets/gpt-2/*
+!assets/datasets/gpt-2/README.md
+assets/tfrecords/*
+!assets/tfrecords/README.md
+
+# instaloader sessions 
+.sessions/*

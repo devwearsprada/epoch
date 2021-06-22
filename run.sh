@@ -50,6 +50,12 @@ do
   python stylegan2/dataset_tool.py create_from_images ./assets/tfrecords/${ACCOUNT} ./assets/datasets/stylegan2/${ACCOUNT}-cropped
 
   echo "[INFO]: Training StyleGAN2 model based on @${ACCOUNT}"
+  # create folder for training result
+  if [ ! -d ./assets/results/stylegan2/${ACCOUNT} ]; then
+    mkdir ./assets/results/stylegan2/${ACCOUNT}
+  fi
+
+  # training
   python stylegan2/run_training.py --num-gpus=1 --data-dir=./assets/tfrecords/ --config=config-f --dataset=${ACCOUNT} --mirror-augment=true --gamma=1000 --total-kimg 200
   # increment counter
   ((i++))

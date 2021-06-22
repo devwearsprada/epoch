@@ -74,4 +74,4 @@ def resize_and_crop(img_path, modified_path, size, crop_type='middle'):
 
 for file in os.listdir(DIRECTORY):
     if file.endswith(".jpg") or file.endswith(".jpeg") or file.endswith("png") or file.endswith(".JPEG") or file.endswith(".JPG") or file.endswith("PNG"):
-        resize_and_crop(DIRECTORY + file, SAVE_DIR + file, (512, 512))
+        resize_and_crop(DIRECTORY + file, SAVE_DIR + file, (256, 256))

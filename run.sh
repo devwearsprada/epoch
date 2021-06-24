@@ -3,7 +3,7 @@
 # get dotenv instagram username & password
 IG_LOGIN=$(grep -v '^#' .env | grep -e "IG_USERNAME" | sed -e 's/.*=//')
 IG_PASSWORD=$(grep -v '^#' .env | grep -e "IG_PASSWORD" | sed -e 's/.*=//')
-ACCOUNTS=("mrpimpgoodgame" "tunameltsmyheart" "patmcgrathreal")
+ACCOUNTS=("patmcgrathreal" "tunameltsmyheart")
 LENGTH=${#ACCOUNTS[@]}
 
 i=0
@@ -43,7 +43,7 @@ do
     mkdir ./assets/datasets/stylegan2/${ACCOUNT}-cropped
   fi
 
-  python ./assets/dataset_resize.py -d ./assets/datasets/stylegan2/${ACCOUNT}/ -s ./assets/datasets/stylegan2/${ACCOUNT}-cropped/
+  python ./assets/dataset_resize.py -i ./assets/datasets/stylegan2/${ACCOUNT}/ -o ./assets/datasets/stylegan2/${ACCOUNT}-cropped/ -d 512 512
 
   echo "[INFO]: Creating TFRecords of ${ACCOUNT}-cropped"
   # create .tfrecords for training

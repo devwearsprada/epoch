@@ -5,14 +5,17 @@ from PIL import Image
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--directory', '-d', type=str,
+parser.add_argument('--input', '-i', type=str,
                     help='Directory containing the images that need to be resized', required=True)
-parser.add_argument('--save', '-s', type=str,
+parser.add_argument('--output', '-o', type=str,
                     help='Where to save the resized images', required=True)
+parser.add_argument('--dimensions', '-d', type=int, nargs='+',
+                    help='Dimensions for width and height. Example: 512 512', required=True)
 args = parser.parse_args()
 
-DIRECTORY = args.directory
-SAVE_DIR = args.save
+DIRECTORY = args.input
+SAVE_DIR = args.output
+DIMENSIONS = tuple(args.dimensions)
 
 
 def resize_and_crop(img_path, modified_path, size, crop_type='middle'):
@@ -74,4 +77,4 @@ def resize_and_crop(img_path, modified_path, size, crop_type='middle'):
 
 for file in os.listdir(DIRECTORY):
     if file.endswith(".jpg") or file.endswith(".jpeg") or file.endswith("png") or file.endswith(".JPEG") or file.endswith(".JPG") or file.endswith("PNG"):
-        resize_and_crop(DIRECTORY + file, SAVE_DIR + file, (256, 256))
+        resize_and_crop(DIRECTORY + file, SAVE_DIR + file, DIMENSIONS)

@@ -1,7 +1,12 @@
 import os
+from os.path import join, dirname
 from datetime import datetime
 import argparse
+from dotenv import load_dotenv
 from instaloader import Instaloader, Profile
+
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 parser = argparse.ArgumentParser()
 
@@ -16,12 +21,18 @@ parser.add_argument('--quiet', '-q', type=bool,
                     
 args = parser.parse_args()
 
+IG_USERNAME = os.environ.get("IG_USERNAME")
+
 ACCOUNT = args.account
 OUTPUT = args.output
 COUNT = args.count
 QUIET = args.quiet
 
 L = Instaloader(quiet=QUIET)
+# # login
+if IG_USERNAME is not None:
+    L.load_session_from_file(IG_USERNAME)
+
 profile = Profile.from_username(L.context, ACCOUNT)
 posts = profile.get_posts()
 

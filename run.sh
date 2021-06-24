@@ -27,8 +27,8 @@ do
 
   echo "[INFO]: Resizing ${ACCOUNT} to ${ACCOUNT}-cropped"
   # create empty folder for cropped images
-  if [ ! -d ./assets/datasets/stylegan2/${ACCOUNT}-cropped ]; then
-    mkdir ./assets/datasets/stylegan2/${ACCOUNT}-cropped
+  if [ ! -d ./assets/datasets/${ACCOUNT}-cropped ]; then
+    mkdir ./assets/datasets/${ACCOUNT}-cropped
   fi
 
     # remove images if amount is higher than count
@@ -56,7 +56,8 @@ do
   fi
 
   # training
-  python stylegan2/run_training.py --num-gpus=1 --data-dir=./assets/tfrecords/ --config=config-f --dataset=${ACCOUNT} --mirror-augment=true --gamma=1000 --total-kimg 200
+  python stylegan2/run_training.py --num-gpus=1 --data-dir=./assets/tfrecords/ --config=config-f --dataset=${ACCOUNT} --mirror-augment=true --gamma=1000 --total-kimg 200 --result-dir=./assets/results/stylegan2/
+  
   # increment counter
   ((i++))
 done

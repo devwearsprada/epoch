@@ -51,7 +51,7 @@ try:
         f.write(caption)
 
         date = post.date_utc.strftime("%m.%d.%Y-%H:%M:%S")
-        L.download_pic(filename="{}{}-{}-{}".format(OUTPUT, x, ACCOUNT, date), url=post.url, mtime=datetime.now())
+        L.download_pic(filename="{}-{}-{}".format(OUTPUT, ACCOUNT, date), url=post.url, mtime=datetime.now())
 
         print("[{}/{}]: @{} [{:35.35}...] ".format(x, COUNT, ACCOUNT, caption))
 except KeyboardInterrupt:

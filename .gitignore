@@ -156,10 +156,8 @@ Thumbs.db
 ##########################
 
 # assets
-assets/datasets/stylegan2/*
-!assets/datasets/stylegan2/README.md
-assets/datasets/gpt-2/*
-!assets/datasets/gpt-2/README.md
+assets/datasets/*
+!assets/datasets/README.md
 assets/results/stylegan2/*
 !assets/results/stylegan2/README.md
 assets/results/gpt-2/*

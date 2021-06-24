@@ -1,0 +1,1 @@
+# GPT-2 checkpoint directory

@@ -150,6 +150,9 @@ Thumbs.db
 # profiling data
 .prof
 
+# vscode
+.vscode/
+.vscode/*
 
 ##########################
 ###   Epoch specific   ###
@@ -165,5 +168,14 @@ assets/results/gpt-2/*
 assets/tfrecords/*
 !assets/tfrecords/README.md
 
+# StyleGAN2
+.stylegan2-cache/
+.stylegan2-cache/*
+
+# GPT-2
+gpt-2/models/*
+!gpt-2/models/README.md
+gpt-2/checkpoint/*
+!gpt-2/checkpoint/README.md
 # instaloader sessions 
 .sessions/*

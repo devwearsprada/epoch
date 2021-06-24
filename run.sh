@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ACCOUNTS=("patmcgrathreal" "tunameltsmyheart")
+ACCOUNTS=("patmcgrathreal" "tunameltsmyheart" "gymshark")
 LENGTH=${#ACCOUNTS[@]}
 
 i=0
@@ -43,8 +43,10 @@ do
   #   mkdir ./assets/results/stylegan2/${ACCOUNT}
   # fi
   # # training
-  # python stylegan2/run_training.py --num-gpus=1 --data-dir=./assets/tfrecords/ --config=config-f --dataset=${ACCOUNT} --mirror-augment=true --gamma=1000 --total-kimg 200 --result-dir=./assets/results/stylegan2/
+  # python stylegan2/run_training.py --num-gpus=1 --data-dir=./assets/tfrecords/ --config=config-f --dataset=${ACCOUNT} --mirror-augment=true --gamma=1000 --total-kimg 600 --result-dir=./assets/results/stylegan2/
   
+  echo "[INFO]: Generating new @${ACCOUNT} image"
+  python stylegan2/run_generator.py generate-images --network ./assets/results/stylegan2/${ACCOUNT}/network-final.pkl --seeds $(( ( RANDOM % 9999 ) + 1)) --result-dir=./assets/results/stylegan2/
 
   # increment counter
   ((i++))

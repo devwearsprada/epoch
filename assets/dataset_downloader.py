@@ -22,6 +22,7 @@ parser.add_argument('--quiet', '-q', type=bool,
 args = parser.parse_args()
 
 IG_USERNAME = os.environ.get("IG_USERNAME")
+IG_PASSWORD = os.environ.get("IG_PASSWORD")
 
 ACCOUNT = args.account
 OUTPUT = args.output
@@ -30,8 +31,9 @@ QUIET = args.quiet
 
 L = Instaloader(quiet=QUIET)
 # # login
-if IG_USERNAME is not None:
-    L.load_session_from_file(IG_USERNAME)
+if IG_USERNAME is not None and IG_PASSWORD is not None:
+    # L.load_session_from_file(IG_USERNAME)
+    L.login(IG_USERNAME, IG_PASSWORD)
 
 profile = Profile.from_username(L.context, ACCOUNT)
 posts = profile.get_posts()

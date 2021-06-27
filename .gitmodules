@@ -1,6 +1,9 @@
 [submodule "stylegan2"]
 	path = stylegan2
 	url = https://github.com/devwearsprada/stylegan2.git
-[submodule "api"]
-	path = api
+[submodule "app/api"]
+	path = app/api
 	url = git@github.com:devwearsprada/epoch-api.git
+[submodule "app/client"]
+	path = app/client
+	url = git@github.com:devwearsprada/epoch-client.git

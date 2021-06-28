@@ -2,6 +2,7 @@ import warnings  # nopep8
 warnings.simplefilter(action='ignore', category=FutureWarning)  # nopep8
 import gpt_2_simple as gpt2
 import argparse
+import random
 
 parser = argparse.ArgumentParser()
 
@@ -19,4 +20,4 @@ sess = gpt2.start_tf_sess()
 gpt2.load_gpt2(sess, run_name=run_name, checkpoint_dir=checkpoint_dir)
 
 gpt2.generate(sess, run_name=run_name, checkpoint_dir=checkpoint_dir,
-              prefix="Epoch is", temperature=1.0)
+              temperature=1.0, destination_path="./assets/results/gpt-2/" + run_name + '.txt', length=random.randint(200, 350))

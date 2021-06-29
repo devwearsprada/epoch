@@ -54,9 +54,6 @@ do
   python gpt-2/run_generator.py -c ./gpt-2/checkpoint -n ${ACCOUNT}
   CAPTION=$( cat ./assets/results/gpt-2/${ACCOUNT}.txt)
 
-  echo "[INFO]: Generating new @${ACCOUNT} image"
-  python stylegan2/run_generator.py generate-images --network ./assets/results/stylegan2/${ACCOUNT}/network-final.pkl --seeds $(( ( RANDOM % 9999 ) + 1)) --result-dir=./assets/results/stylegan2/
-
   echo "[INFO]: Training StyleGAN2 model based on @${ACCOUNT}"
   # create folder for training result
   if [ ! -d ./assets/results/stylegan2/${ACCOUNT} ]; then
@@ -64,6 +61,9 @@ do
   fi
   # training
   python stylegan2/run_training.py --num-gpus=1 --data-dir=./assets/tfrecords/ --config=config-f --dataset=${ACCOUNT} --mirror-augment=true --gamma=1000 --total-kimg 1 --result-dir=./assets/results/stylegan2/
+
+  echo "[INFO]: Generating new @${ACCOUNT} image"
+  python stylegan2/run_generator.py generate-images --network ./assets/results/stylegan2/${ACCOUNT}/network-final.pkl --seeds $(( ( RANDOM % 9999 ) + 1)) --result-dir=./assets/results/stylegan2/
 
   echo "[INFO]: Uploading generated ${ACCOUNT} to /fakes"
   curl -F title=epoch -F caption="$CAPTION" -F image=@./assets/results/stylegan2/${ACCOUNT}/generated.png -F account=${ACCOUNT} https://epoch-api.glowie.dev/generated
